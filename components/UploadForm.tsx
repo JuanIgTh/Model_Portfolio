@@ -1,8 +1,13 @@
 'use client'
 
+
 import { useState } from 'react'
 
-export default function UploadForm() {
+type UploadFormProps = {
+  onUpload: (url: string) => void
+}
+
+export default function UploadForm({ onUpload }: UploadFormProps) {
   const [preview, setPreview] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
