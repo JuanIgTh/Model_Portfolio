@@ -3,7 +3,7 @@ import HeroBanner from '@/components/HeroBanner'
 import About from '@/components/About'
 
 async function getImages(): Promise<string[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/cloudinary`, {
+  const res = await fetch(`/api/cloudinary`, {
     cache: 'no-store',
   })
   const data = await res.json()
