@@ -2,14 +2,26 @@ import Gallery from '@/components/Gallery'
 import HeroBanner from '@/components/HeroBanner'
 import About from '@/components/About'
 
-async function getImages(): Promise<string[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+import { headers } from 'next/headers'
+
+async function getBaseUrl() {
+  const headersList = await headers() // ✅ await aquí
+  const host = headersList.get('host')
+  const protocol = host?.includes('localhost') ? 'http' : 'https'
+  return `${protocol}://${host}`
+}
+
+export async function getImages(): Promise<string[]> {
+  const baseUrl = await getBaseUrl()
   const res = await fetch(`${baseUrl}/api/cloudinary`, {
     cache: 'no-store',
   })
+
   if (!res.ok) {
-    throw new Error(`Failed to fetch images: ${res.status}`)
+    console.error('❌ Error al obtener imágenes:', res.status)
+    return []
   }
+
   const data = await res.json()
   return data.urls
 }
