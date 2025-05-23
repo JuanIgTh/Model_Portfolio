@@ -19,7 +19,7 @@ export default function CustomCursor() {
   }, [])
 
   return (
-    <div
+    <div  
       ref={cursorRef}
       className="pointer-events-none fixed z-[9999] top-0 left-0 w-10 h-10 rounded-full mix-blend-difference bg-white opacity-80 transition-transform duration-150 ease-out hidden md:block"
     />
