@@ -2,10 +2,10 @@ import Image from 'next/image'
 
 export default function HeroBanner() {
   return (
-    <section className="relative w-full h-[70vh] flex items-center justify-center">
+    <section className="relative w-full h-[90vh] flex items-center justify-center">
       <div className="relative w-full h-full ">
         <Image
-          src="/me-banner.png" // reemplazalo por tu PNG real
+          src="" // reemplazalo por tu PNG real
           alt="Hero Banner"
           fill
           className="object-contain md:object-cover"

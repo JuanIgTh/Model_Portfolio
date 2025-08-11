@@ -24,7 +24,7 @@ export default function AboutSection() {
           className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl"
         >
           <Image
-            src="/about-profile.png"
+            src=""
             alt="Foto de perfil"
             fill
             className="object-cover"

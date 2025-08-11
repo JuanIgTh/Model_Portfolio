@@ -1,28 +1,135 @@
-import Image from 'next/image'
+"use client";
 
-export default function Gallery({ images }: { images: string[] }) {
+import Image from "next/image";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+type Album = {
+  name: string;
+  thumbnailUrl: string | null;
+  images: string[];
+};
+
+export default function Gallery({ images }: { images: Album[] }) {
+  const [selectedAlbumIndex, setSelectedAlbumIndex] = useState<number | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
+
+  const openLightbox = (albumIndex: number) => {
+    setSelectedAlbumIndex(albumIndex);
+    setSelectedImageIndex(0);
+  };
+
+  const closeLightbox = () => setSelectedAlbumIndex(null);
+
+  const showPrev = () => {
+    if (selectedAlbumIndex === null) return;
+    setSelectedImageIndex((i) => {
+      const imagesCount = images[selectedAlbumIndex].images.length;
+      return i > 0 ? i - 1 : imagesCount - 1;
+    });
+  };
+
+  const showNext = () => {
+    if (selectedAlbumIndex === null) return;
+    setSelectedImageIndex((i) => {
+      const imagesCount = images[selectedAlbumIndex].images.length;
+      return i < imagesCount - 1 ? i + 1 : 0;
+    });
+  };
+
   return (
-    <div className="py-6 grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[250px] md:auto-rows-[400px] ">
-      {images.map((url, i) => {
-        const isTall = (i + 1) % 3 === 0 // cada 3era imagen
-        return (
-          <div
-            key={i}
-            className={`relative rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform ${
-              isTall ? 'md:row-span-2 md:col-span-1 col-span-2' : ''
-            }`}
+    <>
+      {/* Grid de álbumes */}
+      <div className="py-6 grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[250px] md:auto-rows-[400px]">
+        {images.map((album, i) => {
+        const isTall = (i + 1) % 3 === 0;
+        const isEven = (images.length % 2 === 0)
+        const lastItem = images.length === i + 1
+
+          const url = album.thumbnailUrl || "";
+
+          return (
+            <div
+              key={album.name}
+              className={`relative rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer ${
+                isTall ? "md:row-span-2 md:col-span-1 col-span-2" : lastItem && isEven? "col-span-2" : ""
+              }`}
+              onClick={() => openLightbox(i)}
+              title={album.name}
+            >
+              {url ? (
+                <Image
+                  src={url}
+                  alt={`thumbnail-${album.name}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="bg-gray-300 w-full h-full flex items-center justify-center text-gray-600">
+                  Sin imagen
+                </div>
+              )}
+               <p>{album.name}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Lightbox de imágenes del álbum seleccionado */}
+      <AnimatePresence>
+        {selectedAlbumIndex !== null && (
+          <motion.div
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <Image
-              src={url}
-              alt={`image-${i}`}
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover"
-            />
-          </div>
-        )
-      })}
-    </div>
-  )
+            <motion.div
+              key={selectedImageIndex}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className="relative w-[90%] h-[80%] max-w-5xl"
+            >
+              <Image
+                src={images[selectedAlbumIndex].images[selectedImageIndex]}
+                alt={`image-${selectedImageIndex}`}
+                fill
+                className="object-contain"
+              />
+            </motion.div>
+
+            {/* Botón cerrar */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-5 right-5 text-white text-3xl hover:scale-110 transition"
+            >
+              ✕
+            </button>
+
+            {/* Flechas */}
+            {images[selectedAlbumIndex].images.length > 1 && (
+              <>
+                <button
+                  onClick={showPrev}
+                  className="absolute left-5 text-white text-4xl hover:scale-110 transition"
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={showNext}
+                  className="absolute right-5 text-white text-4xl hover:scale-110 transition"
+                >
+                  ›
+                </button>
+              </>
+            )}
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
-  
