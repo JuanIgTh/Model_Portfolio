@@ -27,6 +27,12 @@ export async function getImages(): Promise<string[]> {
   return urls
 }
 
+type Folder = {
+  name: string;
+  thumbnailUrl: string | null;
+  images: string[];
+};
+
 export async function getFoldersWithImages(): Promise<Folder[]> {
   const baseUrl = await getBaseUrl();
   const res = await fetch(`${baseUrl}/api/cloudinary`, {
