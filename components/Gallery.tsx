@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { IoIosPhotos } from 'react-icons/io';
 
 type Album = {
   name: string;
@@ -52,7 +53,7 @@ export default function Gallery({ images }: { images: Album[] }) {
             <div
               key={album.name}
               className={`relative rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer ${
-                isTall ? "md:row-span-2 md:col-span-1 col-span-2" : lastItem && isEven? "col-span-2" : ""
+                isTall ? "md:row-span-2 md:col-span-1 col-span-2" : lastItem && isEven ? "col-span-2" : ""
               }`}
               onClick={() => openLightbox(i)}
               title={album.name}
@@ -70,65 +71,94 @@ export default function Gallery({ images }: { images: Album[] }) {
                   Sin imagen
                 </div>
               )}
-               <p>{album.name}</p>
+              {album.images.length > 1 && (
+                <div className="absolute bottom-2 right-2 rounded-full p-1 flex items-center justify-center  opacity-30">
+                  <IoIosPhotos className="text-white w-6 h-6" />
+                  <span className="text-white ml-1 text-sm font-semibold">{album.images.length}</span>
+                </div>
+              )}
+
             </div>
+
           );
         })}
       </div>
 
       {/* Lightbox de imágenes del álbum seleccionado */}
       <AnimatePresence>
-        {selectedAlbumIndex !== null && (
-          <motion.div
-            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              key={selectedImageIndex}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="relative w-[90%] h-[80%] max-w-5xl"
-            >
-              <Image
-                src={images[selectedAlbumIndex].images[selectedImageIndex]}
-                alt={`image-${selectedImageIndex}`}
-                fill
-                className="object-contain"
-              />
-            </motion.div>
+{selectedAlbumIndex !== null && (
+  <motion.div
+    className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-50"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <motion.div
+      key={selectedImageIndex}
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.9, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 260, damping: 20 }}
+      className="relative w-[90%] h-[80%] max-w-5xl"
+    >
+      <Image
+        src={images[selectedAlbumIndex].images[selectedImageIndex]}
+        alt={`image-${selectedImageIndex}`}
+        fill
+        className="object-contain"
+      />
 
-            {/* Botón cerrar */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-5 right-5 text-white text-3xl hover:scale-110 transition"
-            >
-              ✕
-            </button>
+      {/* Dots container */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+        {images[selectedAlbumIndex].images.map((_, idx) => {
+          const isActive = idx === selectedImageIndex;
+          return (
+            <motion.span
+              key={idx}
+              layoutId={isActive ? "activeDot" : undefined}
+              initial={false}
+              animate={{
+                scale: isActive ? 1.5 : 1,
+                opacity: isActive ? 1 : 0.5,
+                backgroundColor: isActive ? "#fff" : "#888",
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="w-3 h-3 rounded-full cursor-pointer"
+              onClick={() => setSelectedImageIndex(idx)}
+            />
+          );
+        })}
+      </div>
+    </motion.div>
 
-            {/* Flechas */}
-            {images[selectedAlbumIndex].images.length > 1 && (
-              <>
-                <button
-                  onClick={showPrev}
-                  className="absolute left-5 text-white text-4xl hover:scale-110 transition"
-                >
-                  ‹
-                </button>
-                <button
-                  onClick={showNext}
-                  className="absolute right-5 text-white text-4xl hover:scale-110 transition"
-                >
-                  ›
-                </button>
-              </>
-            )}
+    {/* Botón cerrar */}
+    <button
+      onClick={closeLightbox}
+      className="absolute top-5 right-5 text-white text-3xl hover:scale-110 transition"
+    >
+      ✕
+    </button>
 
-          </motion.div>
-        )}
+    {/* Flechas */}
+    {images[selectedAlbumIndex].images.length > 1 && (
+      <>
+        <button
+          onClick={showPrev}
+          className="absolute left-5 text-white text-4xl hover:scale-110 transition"
+        >
+          ‹
+        </button>
+        <button
+          onClick={showNext}
+          className="absolute right-5 text-white text-4xl hover:scale-110 transition"
+        >
+          ›
+        </button>
+      </>
+    )}
+  </motion.div>
+)}
+
       </AnimatePresence>
     </>
   );
