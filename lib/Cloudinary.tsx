@@ -1,9 +1,9 @@
 import { headers } from 'next/headers'
 
-async function getBaseUrl() {
+export async function getBaseUrl() {
   const headersList = await headers()
-  const host = headersList.get('host')
-  const protocol = host?.includes('localhost') ? 'http' : 'https'
+  const host = headersList.get('host') || 'localhost:3000'
+  const protocol = host.includes('localhost') ? 'http' : 'https'
   return `${protocol}://${host}`
 }
 
