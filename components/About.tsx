@@ -15,7 +15,7 @@ export default function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="min-h-screen flex items-center justify-center px-6 py-24 bg-black text-white overflow-hidden"
+      className="rounded-xl min-h-screen flex items-center justify-center px-6 py-24 bg-black text-white overflow-hidden"
     >
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Imagen con parallax */}

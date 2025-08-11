@@ -19,5 +19,6 @@ export async function getImages(): Promise<string[]> {
   }
 
   const data = await res.json()
+  console.log('✅ Imágenes obtenidas:', data.urls)
   return data.urls
 }

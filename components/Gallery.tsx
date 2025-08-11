@@ -2,14 +2,14 @@ import Image from 'next/image'
 
 export default function Gallery({ images }: { images: string[] }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[400px] ">
+    <div className="py-6 grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[250px] md:auto-rows-[400px] ">
       {images.map((url, i) => {
         const isTall = (i + 1) % 3 === 0 // cada 3era imagen
         return (
           <div
             key={i}
             className={`relative rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform ${
-              isTall ? 'row-span-2' : ''
+              isTall ? 'md:row-span-2 md:col-span-1 col-span-2' : ''
             }`}
           >
             <Image
@@ -25,3 +25,4 @@ export default function Gallery({ images }: { images: string[] }) {
     </div>
   )
 }
+  
