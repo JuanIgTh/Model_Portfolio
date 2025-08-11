@@ -15,7 +15,7 @@ export default function UploadPage() {
     <main className="min-h-screen px-6 py-12 bg-background text-foreground">
       <h1 className="text-4xl font-classy mb-6 text-center">Sube tus Fotos</h1>
       <UploadForm onUpload={handleUpload} />
-      <Gallery images={images} />
+      {/* <Gallery images={images} /> */}
     </main>
   )
 }

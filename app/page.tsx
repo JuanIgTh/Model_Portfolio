@@ -20,7 +20,7 @@ export default async function Home() {
       </div>
 
       <main className="min-h-screen p-6 bg-background text-foreground">
-        <h1 className="text-4xl font-classy text-center mb-8 ">Álbumes</h1>
+        <h1 className="text-4xl font-classy text-center mb-8 opacity-90">Álbumes</h1>
         {/* <Gallery images={images} /> */}
         <Gallery images={folders} />
         <About />
