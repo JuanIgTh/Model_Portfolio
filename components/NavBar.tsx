@@ -3,9 +3,24 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useSmoothScroll } from '@/lib/useSmoothScroll'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { scrollTo, scrollToTop } = useSmoothScroll()
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId?: string) => {
+    e.preventDefault()
+    setMenuOpen(false)
+    
+    if (targetId) {
+      // Scroll a sección con offset para la navbar fija
+      scrollTo(targetId, 100)
+    } else {
+      // Scroll al top para Home
+      scrollToTop()
+    }
+  }
 
   return (
     <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-45 bg-black/50 backdrop-blur rounded-full shadow-lg px-8 py-3 flex items-center justify-between max-w-3xl w-[60vw]">
@@ -15,9 +30,33 @@ export default function Navbar() {
 
       {/* Desktop menu */}
       <ul className="hidden md:flex space-x-8 text-white font-medium">
-        <li><Link href="/" className="hover:text-gray-300 transition">Home</Link></li>
-        <li><Link href="/#shoots" className="hover:text-gray-300 transition">Shoots</Link></li>
-        <li><Link href="/#about" scroll={false} className="hover:text-gray-300 transition">About me</Link></li> 
+        <li>
+          <a 
+            href="/" 
+            className="hover:text-gray-300 transition cursor-pointer"
+            onClick={(e) => handleNavClick(e)}
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#shoots" 
+            className="hover:text-gray-300 transition cursor-pointer"
+            onClick={(e) => handleNavClick(e, 'shoots')}
+          >
+            Shoots
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#about" 
+            className="hover:text-gray-300 transition cursor-pointer"
+            onClick={(e) => handleNavClick(e, 'about')}
+          >
+            About me
+          </a>
+        </li>
         {/* <li><Link href="#contact" className="hover:text-gray-300 transition">Contact</Link></li> */}
       </ul>
 
@@ -62,9 +101,33 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-md rounded-xl shadow-lg py-4 w-48 flex flex-col space-y-3 text-white font-medium"
           >
-            <li><Link href="/" className="block px-4 py-1 hover:bg-white/10 rounded" onClick={() => setMenuOpen(false)}>Home</Link></li>
-            <li><Link href="#shoots" className="block px-4 py-1 hover:bg-white/10 rounded" onClick={() => setMenuOpen(false)}>Shoots</Link></li>
-            <li><Link href="#about" className="block px-4 py-1 hover:bg-white/10 rounded" onClick={() => setMenuOpen(false)}>About me</Link></li>
+            <li>
+              <a 
+                href="/" 
+                className="block px-4 py-1 hover:bg-white/10 rounded cursor-pointer"
+                onClick={(e) => handleNavClick(e)}
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#shoots" 
+                className="block px-4 py-1 hover:bg-white/10 rounded cursor-pointer"
+                onClick={(e) => handleNavClick(e, 'shoots')}
+              >
+                Shoots
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#about" 
+                className="block px-4 py-1 hover:bg-white/10 rounded cursor-pointer"
+                onClick={(e) => handleNavClick(e, 'about')}
+              >
+                About me
+              </a>
+            </li>
             {/* <li><Link href="#contact" className="block px-4 py-1 hover:bg-white/10 rounded" onClick={() => setMenuOpen(false)}>Contacto</Link></li> */}
           </motion.ul>
         )}
