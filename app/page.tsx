@@ -11,7 +11,7 @@ export default async function Home() {
     <>
       <HeroBanner />
 
-      <div className="flex items-center my-4 mx-10">
+      <div className="flex items-center my-10 mx-10">
         <div className="flex-grow border-t border-white/15"></div>
         <div className="px-3">
           <div className="w-3 h-3 border-t border-white/15 rounded-full"></div>
@@ -20,7 +20,7 @@ export default async function Home() {
       </div>
 
       <main className="min-h-screen p-6 bg-background text-foreground">
-        <h1 className="text-4xl font-classy text-center mb-8 opacity-90">Álbumes</h1>
+        <h1 className="text-4xl font-classy text-center mb-8 opacity-90">Shoots</h1>
         {/* <Gallery images={images} /> */}
         <Gallery images={folders} />
         <About />

@@ -24,7 +24,7 @@ export default function AboutSection() {
           className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl"
         >
           <Image
-            src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1754915480/unnamed_jl2bsd.png"
+            src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1754978430/drilldown_njg1rw.jpg"
             alt="Foto de perfil"
             fill
             className="object-cover"
@@ -33,7 +33,7 @@ export default function AboutSection() {
 
         {/* Texto con parallax más leve */}
         <motion.div style={{ y: yText }} className="space-y-6">
-          <h2 className="text-3xl md:text-5xl font-light tracking-wide">Sobre mí</h2>
+          <h2 className="text-3xl md:text-5xl font-light tracking-wide">About me</h2>
           <p className="text-lg text-gray-300 leading-relaxed">
             Soy un/a modelo apasionado/a por la estética, la expresión corporal y la fotografía
             conceptual. Este portfolio es una curaduría de mi trabajo más personal, explorando la

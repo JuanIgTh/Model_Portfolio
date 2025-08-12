@@ -5,7 +5,7 @@ export default function HeroBanner() {
     <section className="relative w-full h-[80vh] flex items-center justify-center">
     <div className="relative w-full h-full bg-black">
       <Image
-        src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1754915480/unnamed_jl2bsd.png"
+        src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1754978430/drilldown_njg1rw.jpg"
         alt="Hero Banner"
         fill
         className="md:object-cover"

@@ -2,6 +2,12 @@ import './globals.css'
 import type { Metadata } from 'next'
 import Cursor  from '@/components/Cursor'
 import Navbar from '@/components/NavBar'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap', // para mejor rendimiento
+})
 
 export const metadata: Metadata = {
   title: 'Portfolio Modelo',
@@ -10,13 +16,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" className={inter.className}>
       
-      <body className="bg-background text-foreground font-classy">
-        <Cursor />
-        <Navbar />
-        {children}
-      </body>
+    <body className={`${inter.className} bg-background text-foreground`}>
+      <Cursor />
+      <Navbar />
+      {children}
+    </body>
+
       
     </html>
   )
