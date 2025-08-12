@@ -24,7 +24,7 @@ export default function AboutSection() {
           className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl"
         >
           <Image
-            src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1754978430/drilldown_njg1rw.jpg"
+            src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1755013448/model-uploads/album-grunge-duo/a.png"
             alt="Foto de perfil"
             fill
             className="object-cover"

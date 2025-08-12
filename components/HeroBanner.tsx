@@ -9,7 +9,7 @@ export default function HeroBanner() {
     <section className={`relative w-full h-[80vh] flex items-center justify-center transition-opacity duration-2000 ease-in-out   ${loaded ? 'opacity-100' : 'opacity-0'}`}>
       <div className={`relative w-full h-full bg-black `}>
         <Image
-          src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1754978430/drilldown_njg1rw.jpg"
+          src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1755013448/model-uploads/album-grunge-duo/a.png"
           alt="Hero Banner"
           fill
           className="md:object-cover"
