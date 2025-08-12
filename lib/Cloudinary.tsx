@@ -1,18 +1,11 @@
 import { headers } from 'next/headers'
 
 export async function getBaseUrl() {
-  if (typeof window !== "undefined") return ""; // Cliente → relativo
-
-  // Node server
-  const dev = process.env.NODE_ENV !== "production";
-  if (dev) {
-    return "http://localhost:3000";
-  }
-
-  // Producción
-  return `https://${process.env.VERCEL_URL}`;
+  const headersList = await headers()
+  const host = headersList.get('host') || 'localhost:3000'
+  const protocol = host.includes('localhost') ? 'http' : 'https'
+  return `${protocol}://${host}`
 }
-
 
 export async function getImages(): Promise<string[]> {
   const baseUrl = await getBaseUrl()
