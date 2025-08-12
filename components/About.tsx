@@ -15,7 +15,7 @@ export default function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="rounded-xl min-h-screen flex items-center justify-center px-6 py-24 bg-black text-white overflow-hidden"
+      className="rounded-xl min-h-screen flex items-center justify-center px-6 py-24 bg-gradient-to-b from-transparent via-black to-transparent text-white overflow-hidden"
     >
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Imagen con parallax */}
@@ -35,14 +35,12 @@ export default function AboutSection() {
         <motion.div style={{ y: yText }} className="space-y-6">
           <h2 className="text-3xl md:text-5xl font-light tracking-wide">About me</h2>
           <p className="text-lg text-gray-300 leading-relaxed">
-            Soy un/a modelo apasionado/a por la estética, la expresión corporal y la fotografía
-            conceptual. Este portfolio es una curaduría de mi trabajo más personal, explorando la
-            luz, la sombra y la identidad visual.
+            I am a model deeply committed to aesthetics, body expression, and conceptual photography. This portfolio is a curated selection of my most personal work, exploring light, shadow, and visual identity.
           </p>
           <p className="text-gray-400 text-base">
-            Disponible para colaboraciones, sesiones editoriales y proyectos creativos.
-            Contáctame si quieres trabajar conmigo.
+            Available for collaborations, editorial shoots, and creative projects. Reach out if you’re interested in working together.
           </p>
+
         </motion.div>
       </div>
     </section>

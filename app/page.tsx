@@ -1,6 +1,7 @@
 import Gallery from '@/components/Gallery'
 import HeroBanner from '@/components/HeroBanner'
 import About from '@/components/About'
+import Footer from '@/components/Footer'
 import { getImages, getFoldersWithImages } from '@/lib/Cloudinary'
 
 export default async function Home() {
@@ -11,7 +12,7 @@ export default async function Home() {
     <>
       <HeroBanner />
 
-      <div className="flex items-center my-10 mx-10">
+      <div className="flex items-center my-10 mx-20">
         <div className="flex-grow border-t border-white/15"></div>
         <div className="px-3">
           <div className="w-3 h-3 border-t border-white/15 rounded-full"></div>
@@ -19,11 +20,13 @@ export default async function Home() {
         <div className="flex-grow border-t border-white/15"></div>
       </div>
 
-      <main className="min-h-screen p-6 bg-background text-foreground">
-        <h1 className="text-4xl font-classy text-center mb-8 opacity-90">Shoots</h1>
+      <main className="min-h-screen pb-6 bg-background text-foreground">
         {/* <Gallery images={images} /> */}
-        <Gallery images={folders} />
         <About />
+        
+        <Gallery images={folders} />
+        
+        <Footer />
       </main>
     </>
   )

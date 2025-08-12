@@ -16,5 +16,9 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animated'),
+    require("tailwindcss-animation-delay"),
+    require('taos/plugin')
+  ],
 }

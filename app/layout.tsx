@@ -10,8 +10,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Portfolio Modelo',
-  description: 'Portfolio personal con galería dinámica',
+  title: 'Model Portfolio ',
+  description: 'Personal minimalistic Portfolio',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
