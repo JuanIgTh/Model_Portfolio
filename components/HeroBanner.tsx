@@ -12,7 +12,7 @@ export default function HeroBanner() {
           src="https://res.cloudinary.com/dmnwgau7y/image/upload/v1755013448/model-uploads/album-grunge-duo/a.png"
           alt="Hero Banner"
           fill
-          className="md:object-cover"
+          className="md:object-cover object-contain"
           onLoad={() => setLoaded(true)}
           priority
         />
